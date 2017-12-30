@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>登录-物业宝项目 - 后台管理系统</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min.css" rel="stylesheet">
+    <base target="_blank">
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <style type="text/css">
+    	.loginscreen.middle-box{width:500px;max-width: 400px;height: 330px;border: 1px solid #797979;padding: 0;margin-top: 250px;overflow: hidden;}
+    	.loginscreen label{float: left;height: 34px;line-height: 34px;margin-right: 5px;color: #333333;width: 20%;text-align: right;}
+    	.loginscreen input{float: left;width: 75%;}
+    	.loginscreen form:nth-child(1){width: 80%;margin: 0 auto;}
+    	.loginscreen form:nth-child(2){width: 90%;margin: 0 auto;}
+    	.form-group{overflow: hidden;height: 54px;}
+    	.loginBtn{margin: 0 auto;margin-top:15px;width: 70px;}
+    	.loginscreen .wrong{color: #dd1a13;text-align: center;font-size: 12px;height: 20px;}
+    	.codeLogin,.passwordLogin{width: 400px;height:290px;display: none;}
+    	.goRegister{font-size: 16px;margin-top:30px;text-align: right;}
+    	.loginTab{font-size: 16px;color: #0000ff;text-align: right;cursor: pointer;margin-left: 242px;}
+    	.loginTab:hover{text-decoration: underline;}
+    	
+    	/*短信*/
+    	.loginscreen .codeLogin label{width: 25%;}
+    	.loginscreen .codeLogin #phone{width: 45%;margin-right: 5%;}
+    	.loginscreen .codeLogin #code{width: 25%;}
+    	.codeloginTab{font-size: 16px;color: #0000ff;text-align: right;cursor: pointer;margin-left: 242px;}
+    	
+    </style>
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div class="passwordLogin" style="display: block;">          
+            <h3 style="margin-top: 20px;">账号密码登录</h3>
+            <form class="m-t" role="form" action="index.html">
+                <div class="form-group">
+                	<div class="wrong" id="errMsgTelDiv"></div>
+                	<label>用户名：</label>               	
+                    <input id="userName" type="text" maxlength="11" class="form-control" placeholder="用户名/手机号" onblur="mobileCheck(this.value)" required="required">
+                </div>
+                <div class="form-group">
+                	<div class="wrong" id="errMsgPassDiv"></div>
+                	<label>密码：</label>                	
+                    <input type="password" class="form-control" placeholder="密码"  maxlength="12" onblur="checkPWD(this.value)" required="required">
+                </div>
+                <p class="loginTab">快捷登录</p>
+                <button type="submit" class="btn btn-primary block m-b loginBtn">登 录</button> 
+                <p class="goRegister">还没有账号？<a href="register.html">立即注册</a></p>
+            </form>
+        </div>
+        
+        <div class="codeLogin">           
+            <h3 style="margin-top: 20px;">手机验证码登录</h3>
+            <form class="m-t" role="form" action="index.html">
+                <div class="form-group">
+                	<div class="wrong" id="errMsgTelDiv"></div>
+                	<label>用户名：</label>               	
+                    <input id="phone" type="tel" maxlength="11" class="form-control" placeholder="手机号" onblur="mobileCheck(this.value)" required="required">
+                    <button class="btn btn-primary block m-b">发送短信</button>
+                </div>
+                <div class="form-group">
+                	<div class="wrong" id="errMsgCodeDiv"></div>
+                	<label>短信验证码：</label>                	
+                    <input id="code" type="text" class="form-control" placeholder=""  maxlength="6" onblur="" required="required">
+                </div>
+                <p class="codeloginTab">账号密码登录</p>
+                <button type="submit" class="btn btn-primary block m-b loginBtn">登 录</button> 
+                <p class="goRegister">还没有账号？<a href="register.html">立即注册</a></p>
+            </form>
+        </div>
+    </div>
+    
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	 //手机号验证
+    function isMobile(value) {
+        if (value == null || '' == value) return false;
+        value = $.trim(value);
+        var length = value.length;
+        var mobile = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        return (length == 11 && mobile.test(value));
+    }
+    function mobileCheck(mobile) {
+        if (isMobile(mobile)) {
+            $("#errMsgTelDiv").html("");
+            return true;
+        } else {
+            $("#errMsgTelDiv").html("请输入正确的手机号");
+            return false;
+        }
+    }
+    
+ 	//密码验证
+    function isPassWord(value) {
+        if (value == null || '' == value) return false;
+        return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/.test(value);
+    }
+
+ 	// 校验用户密码
+    function checkPWD(pwd) {
+        if (!isPassWord(pwd)) {          
+            $("#errMsgPassDiv").html("请输入6-12位密码包含数字、字母");
+            return false;
+        } else {         
+            $("#errMsgPassDiv").hide();
+            return true;
+        }
+    }
+
+	//登录方式切换
+	$('.loginTab').click(function(){
+		$('.passwordLogin').fadeOut();
+		$('.codeLogin').fadeIn();
+	});
+	$('.codeloginTab').click(function(){
+		$('.codeLogin').fadeOut();
+		$('.passwordLogin').fadeIn();
+	});
+
+
+	
+	
+	
+</script>
+
+</html>

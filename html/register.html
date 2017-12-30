@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>注册-物业宝项目 - 后台管理系统 </title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min.css" rel="stylesheet">
+    <base target="_blank">
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <style type="text/css">
+    	.loginscreen.middle-box{width:800px;max-width: 800px;height: 640px;border: 1px solid #797979;padding: 0;margin-top: 140px;overflow: hidden;}
+    	.loginscreen label{float: left;height: 34px;line-height: 34px;margin-right: 5px;color: #333333;width: 20%;text-align: right;}
+    	.loginscreen input{float: left;width: 55%;}
+    	.loginscreen form{width: 85%;margin: 0 auto;position: relative;}	
+    	.form-group{overflow: hidden;height: 54px;width: 60%;margin-bottom: 5px;}
+    	.form-control{width: 55%;float: left; border:1px solid #707070;}
+    	.subBtn{margin: 0 auto;margin-top:35px;width: 100px;}
+    	.loginscreen .wrong{color: #dd1a13;text-align: center;font-size: 12px;height: 20px;}
+    	.registerBox{width: 800px;height:620px;}
+    	.goRegister{font-size: 16px;margin-top:15px;text-align: right;}   	
+    	.goRegister:hover{text-decoration: underline;}
+    	
+    	.zctitle{width: 90%;height: 30px;margin: 0 auto; margin-top: 20px;border-bottom: 1px solid #797979;text-align: left;line-height: 30px;}
+    	.laydate-icon{font-size: 16px !important;}
+    	.photo{width: 30%;height: 250px;position: absolute;top: 20px;right: 0;}
+    	.photo label{width: 100px;text-align: left;}
+    	.photo input{width: 150px;height: 210px;}
+    </style>
+</head>
+
+<body class="gray-bg" style="overflow: hidden;">
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div class="registerBox">          
+            <h3 class="zctitle">注册</h3>
+            <form class="m-t" role="form" action="">
+            	<div class="form-group">
+                	<div class="wrong" id=""></div>
+                	<label>机构类型：</label> 
+                	<select class="form-control m-b" id="" name="">
+                        <option>中情局</option>
+                        <option>公安局</option>
+                        <option>火星情报局</option>	                                    
+                    </select>
+                </div>
+            	<div class="form-group">
+                	<div class="wrong" id=""></div>
+                	<label>机构名称：</label>               	
+                    <input id="" type="text" class="form-control" placeholder="" required="required">
+                </div>
+                <div class="form-group">
+                	<div class="wrong" id=""></div>
+                	<label>邮箱：</label>               	
+                    <input id="" type="email" class="form-control" placeholder="" required="required">
+                </div>
+                <div class="form-group">
+                	<div class="wrong" id=""></div>
+                    <span class="orderDate">
+		                                         任期：
+			            <span class="laydate-icon star" id="start" style=" margin-right:10px;"></span> 至：
+			            <span class="laydate-icon end" id="end" style=""></span>
+		            </span>
+                </div>
+                <div class="form-group">
+                	<div class="wrong" id=""></div>
+                	<label>负责人：</label>               	
+                    <input id="" type="text" class="form-control" placeholder="" required="required">
+                </div>
+            	<div class="form-group">
+                	<div class="wrong" id="errMsgTelDiv"></div>
+                	<label>联系方式：</label>               	
+                    <input id="" type="tel" maxlength="11" class="form-control" placeholder="手机号可用于快捷登录" onblur="mobileCheck(this.value)" required="required">
+                </div>
+            	
+                <div class="form-group">
+                	<div class="wrong" id="errMsgTelDiv"></div>
+                	<label>用户名：</label>               	
+                    <input id="userName" type="text" maxlength="" class="form-control" placeholder="用于登录" onblur="" required="required">
+                </div>
+                <div class="form-group">
+                	<div class="wrong" id="errMsgPassDiv"></div>
+                	<label>密码：</label>                	
+                    <input type="password" class="form-control" placeholder="密码"  maxlength="12" onblur="checkPWD(this.value)" required="required">
+                </div>  
+                <div class="form-group photo">               	
+                	<label>证照：</label>                	
+                    <input type="file" class="form-control" required="required">
+                </div> 
+                
+                
+                <button type="submit" class="btn btn-primary block m-b subBtn">提交审核</button> 
+                <p class="goRegister"><a href="login.html">返回登录</a></p>
+            </form>
+        </div>
+    </div>
+    
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/layer/laydate/laydate.js"></script>
+<script type="text/javascript">
+	 //手机号验证
+    function isMobile(value) {
+        if (value == null || '' == value) return false;
+        value = $.trim(value);
+        var length = value.length;
+        var mobile = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        return (length == 11 && mobile.test(value));
+    }
+    function mobileCheck(mobile) {
+        if (isMobile(mobile)) {
+            $("#errMsgTelDiv").html("");
+            return true;
+        } else {
+            $("#errMsgTelDiv").html("请输入正确的手机号");
+            return false;
+        }
+    }
+    
+ 	//密码验证
+    function isPassWord(value) {
+        if (value == null || '' == value) return false;
+        return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/.test(value);
+    }
+
+ 	// 校验用户密码
+    function checkPWD(pwd) {
+        if (!isPassWord(pwd)) {          
+            $("#errMsgPassDiv").html("请输入6-12位密码包含数字、字母");
+            return false;
+        } else {         
+            $("#errMsgPassDiv").hide();
+            return true;
+        }
+    }
+
+	//日期范围限制
+  	var start = {
+    	elem: '#start',
+    	format: 'YYYY-MM-DD',
+    	// min: laydate.now(), //设定最小日期为当前日期
+    	max: '2099-06-16', //最大日期
+    	istime: true,
+    	istoday: false,
+    	choose: function(datas) {
+    	  end.min = datas; //开始日选好后，重置结束日的最小日期
+    	  end.start = datas //将结束日的初始值设定为开始日
+    	}
+  	};
+  	var end = {
+    	elem: '#end',
+    	format: 'YYYY-MM-DD',
+    	min: laydate.now(),
+    	max: '2099-06-16',
+    	istime: true,
+    	istoday: false,
+    	choose: function(datas) {
+      		start.max = datas; //结束日选好后，充值开始日的最大日期
+    	}
+  	};
+  	laydate(start);
+  	laydate(end);
+
+	
+	
+	
+</script>
+
+</html>

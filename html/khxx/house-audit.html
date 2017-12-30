@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>业主房产认证审核 - 物业宝项目 - 后台管理系统</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min.css" rel="stylesheet">
+
+    <base target="_blank">
+    <style type="text/css">
+    	.ibox-content-top{border:1px solid #dddddd;}
+    	.ibox-content-top h2{padding: 10px 50px;background: #ebebeb;color: #333333;margin: 0;}
+    	.ibox-content-top label{float: left;height: 34px;line-height: 34px;margin-right: 5px;color: #333333;}
+    	.form-control{width: 55%;float: left; border:1px solid #707070;}
+    	#formss{width: 95%;margin: 10px auto;border-bottom: 1px solid #dddddd;overflow: hidden;}
+    	.form-group{width: 29%;float: left;}
+    	#province,#area,#city{width: 28%;float: left; border:1px solid #707070;}
+    	.form-group:nth-child(2){width: 22%;margin-left: 5%;}  
+    	.form-group:nth-child(3){width: 22%;}
+    	.form-group:nth-child(5){width: 22%;margin-left: 5%;}    	
+    	#search-btn{display: block;margin:10px auto;width: 100px;}
+    	#biao th,#biao td{text-align: center;}
+    	#biao td span{color: rgb(0, 153, 255);cursor: pointer;}
+    	#biao td span:hover{text-decoration: underline;}
+    	.table-striped{border-bottom: 1px solid #dddddd;}
+    	.laydate-icon{font-size: 14px !important;}
+    </style>
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-content"> 
+                    	<div class="ibox-content-top">
+                    		<h2>搜索</h2>  
+                    		<form id="formss" action="" method="post">
+                    			<div class="form-group">
+                                    <label>省-市-区:</label>
+                                    <select class="form-control m-b" id="province" name="province">
+	                                    <option>省 1</option>
+	                                    <option>省 2</option>
+	                                    <option>省 3</option>
+	                                    <option>省 4</option>
+	                                </select>
+	                                <select class="form-control m-b" id="city" name="city">
+	                                    <option>市 1</option>
+	                                    <option>市 2</option>
+	                                    <option>市 3</option>
+	                                    <option>市 4</option>
+	                                </select>
+	                                <select class="form-control m-b" id="area" name="area">
+	                                    <option>区 1</option>
+	                                    <option>区 2</option>
+	                                    <option>区 3</option>
+	                                    <option>区 4</option>
+	                                </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>小&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区:</label>
+                                    <select class="form-control m-b" id="" name="">
+	                                    <option>小区 1</option>
+	                                    <option>小区 2</option>
+	                                    <option>小区 3</option>
+	                                    <option>小区 4</option>
+	                                </select>	                           
+                                </div>
+                    			<div class="form-group">
+                                    <label>审核状态:</label>
+                                    <select class="form-control m-b" id="" name="">
+	                                    <option>未审核</option>
+	                                    <option>审核通过</option>
+	                                    <option>审核拒绝</option>	                                    
+	                                </select>	                           
+                                </div>
+                    			
+                    			<div class="form-group">
+                                    <label>手机号:</label>
+                                    <input type="tel" placeholder="请输入手机号" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>业主姓名:</label>
+                                    <input type="text" placeholder="请输入业主姓名" class="form-control">
+                                </div>
+                                                                   
+                                <div class="form-group">
+                                    <span class="orderDate">
+						                 提交时间：
+							            <span class="laydate-icon star" id="start" style=" margin-right:10px;"></span> 至：
+							            <span class="laydate-icon end" id="end" style=""></span>
+						            </span>
+                                </div>                           
+                    		</form>	     
+                    		<button class="btn btn-sm btn-primary" id="search-btn" type="submit">搜 索</button>
+                    	</div>
+                    </div>
+                </div>
+            </div>       
+        </div>
+        <!--表-->  
+    	<div class="row" id="biao">
+	        <div class="col-sm-12">
+	            <div class="ibox float-e-margins">	                
+	                <div class="ibox-content">	              
+	                    <div class="table-responsive" style="border: 1px solid #ddd;">
+	                        <table class="footable table table-striped">
+	                            <thead>
+	                            <tr>
+	                                <th>提交时间</th>
+	                                <th>业主姓名</th>
+	                                <th>业主类型</th>
+	                                <th>手机号</th>
+	                                <th>省-市-区</th>
+	                                <th>小区名称</th>
+	                                <th>楼号</th>
+	                                <th>房间号</th>
+	                                <th>房产证</th>
+	                                <th>审核状态</th>
+	                                <th>操作人</th>
+	                                <th>操作</th>
+	                            </tr>
+	                            </thead>
+	                            <tbody>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look" data-toggle="modal" data-target="#myModalFcz">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/loading.gif" hidden="hidden"/>
+	                                	<span class="look" data-toggle="modal" data-target="#myModalFcz">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>2016-12-12 12:12</td>
+	                                <td>孙悟空</td>
+	                                <td>业主</td>
+	                                <td>12345678900</td>
+	                                <td>上海市-上海市-静安区</td>
+	                                <td>花果山水帘洞</td>
+	                                <td>10</td>
+	                                <td>101</td>
+	                                <td>
+	                                	<b>劳资是房产证</b>
+	                                	<img src="../../css/plugins/blueimp/img/error.png" hidden="hidden"/>
+	                                	<span class="look">查看</span>
+	                                </td>
+	                                <td>未审核</td>
+	                                <td>唐僧</td>
+	                                <td>
+	                                	<span class="pass">通过 |</span>
+	                                	<span class="refuse">拒绝</span>
+	                                </td>
+	                            </tr>
+	                            
+	                            </tbody>
+	                        	<tfoot>
+			                        <tr>
+			                            <td colspan="12">
+			                                <ul class="pagination pull-right">
+			                                	<li class="footable-page-arrow">
+			                                		<a data-page="first" href="#first">«</a>
+			                                	</li>
+			                                	<li class="footable-page-arrow">
+			                                		<a data-page="prev" href="#prev">‹</a>
+			                                	</li>
+			                                	<li class="footable-page">
+			                                		<a data-page="0" href="#">1</a>
+			                                	</li>
+			                                	<li class="footable-page">
+			                                		<a data-page="1" href="#">2</a>
+			                                	</li>			                                	
+			                                	<li class="footable-page-arrow disabled">
+			                                		<a data-page="next" href="#next">›</a>
+			                                	</li>
+			                                	<li class="footable-page-arrow disabled">
+			                                		<a data-page="last" href="#last">»</a>
+			                                	</li>
+			                                </ul>
+			                            </td>
+			                        </tr>
+		                        </tfoot>
+	                        </table>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+    
+    <!--模态框-->
+    <div class="modal inmodal fade" id="myModalFcz" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    	<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">房产证</h4>                      
+                </div>
+                <div class="modal-body">
+                    <p><img class="fcz" src=""/></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <!--<button type="button" class="btn btn-primary">保存</button>-->
+                </div>               
+            </div>
+       </div>           
+    </div>
+    
+    
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/plugins/footable/footable.all.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../js/content.min.js"></script>
+    <script src="../../js/plugins/layer/laydate/laydate.js"></script>
+   <script>
+   	$(function() {
+		$(".full-height-scroll").slimScroll({
+			height: "100%"
+		});
+		
+		//分页	
+		$(".footable").footable();  
+		
+		//查看房产证
+		$('.look').on('click',function(){
+			var fczSrc=$(this).prev().attr('src');
+			$('#myModalFcz .fcz').attr('src',fczSrc);
+		})
+      
+        
+       
+       
+         
+        
+
+	});
+		//日期范围限制
+	  	var start = {
+	    	elem: '#start',
+	    	format: 'YYYY-MM-DD',
+	    	// min: laydate.now(), //设定最小日期为当前日期
+	    	max: '2099-06-16', //最大日期
+	    	istime: true,
+	    	istoday: false,
+	    	choose: function(datas) {
+	    	  end.min = datas; //开始日选好后，重置结束日的最小日期
+	    	  end.start = datas //将结束日的初始值设定为开始日
+	    	}
+	  	};
+	  	var end = {
+	    	elem: '#end',
+	    	format: 'YYYY-MM-DD',
+	    	min: laydate.now(),
+	    	max: '2099-06-16',
+	    	istime: true,
+	    	istoday: false,
+	    	choose: function(datas) {
+	      		start.max = datas; //结束日选好后，充值开始日的最大日期
+	    	}
+	  	};
+	  	laydate(start);
+	  	laydate(end);
+
+
+   </script>
+
+</body>
+
+</html>
